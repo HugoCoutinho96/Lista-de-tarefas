@@ -1,7 +1,10 @@
 import React from 'react'
 import IconButton from '../template/IconButton'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import {search} from "./todoActions"
 
-export default props => {
+const todoList = props => {
 
     const renderRows = () => {
         const list = props.list || []
@@ -34,3 +37,11 @@ export default props => {
         </table>
     )
 }
+
+const mapStateToProps = state => ({
+    list: state.todo.list
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({search}, dispatch)
+
+export default connect(mapStateToProps)(todoList)
